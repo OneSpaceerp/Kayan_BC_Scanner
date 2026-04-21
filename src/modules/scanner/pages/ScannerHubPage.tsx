@@ -11,7 +11,7 @@ export default function ScannerHubPage() {
   const activeCampaign = useCampaignStore((s) => s.activeCampaign);
 
   const tiles = [
-    { icon: QrCode, label: t("scanner.hub.qr"), to: "/scan/qr", ready: false },
+    { icon: QrCode, label: t("scanner.hub.qr"), to: "/scan/qr", ready: true },
     { icon: ScanLine, label: t("scanner.hub.ocr"), to: "/scan/ocr", ready: false },
     { icon: PenLine, label: t("scanner.hub.manual"), to: "/scan/manual", ready: false },
   ];

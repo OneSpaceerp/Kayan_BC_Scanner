@@ -1,0 +1,121 @@
+{
+  "app": {
+    "name": "BC Scanner",
+    "tagline": "Business card capture for ERPNext"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "serverUrl": "Server URL",
+    "email": "Email",
+    "password": "Password",
+    "loggingIn": "Logging in…",
+    "logoutConfirm": "You have {{count}} unsynced lead(s). Logout anyway?",
+    "errors": {
+      "invalidCredentials": "Invalid username or password.",
+      "unreachable": "Cannot reach server. Check the URL and your connection.",
+      "cors": "Server is not allowing this app. Contact your administrator.",
+      "sessionExpired": "Your session expired. Please log in again.",
+      "forbidden": "You don't have permission for this action.",
+      "serverError": "Server error. We'll retry automatically."
+    }
+  },
+  "campaign": {
+    "title": "Select Campaign",
+    "search": "Search campaigns…",
+    "newCampaign": "New Campaign",
+    "campaignName": "Campaign Name",
+    "startDate": "Start Date",
+    "description": "Description",
+    "create": "Create Campaign",
+    "creating": "Creating…",
+    "offlineBlocked": "Campaigns require connectivity. Go online to create a new campaign.",
+    "noCampaigns": "No campaigns found.",
+    "active": "Active Campaign"
+  },
+  "scanner": {
+    "hub": {
+      "title": "Capture Card",
+      "qr": "Scan QR Code",
+      "ocr": "Scan Card (OCR)",
+      "manual": "Enter Manually"
+    },
+    "qr": {
+      "title": "QR Scanner",
+      "torch": "Torch"
+    },
+    "ocr": {
+      "title": "Scan Card",
+      "capture": "Capture",
+      "retake": "Retake",
+      "processing": "Processing…",
+      "preview": "Preview",
+      "rawText": "Extracted Text",
+      "failed": "Couldn't read the card. Try again or enter manually."
+    },
+    "manual": {
+      "title": "Manual Entry"
+    }
+  },
+  "lead": {
+    "review": "Review Lead",
+    "name": "Full Name",
+    "company": "Company",
+    "jobTitle": "Job Title",
+    "email": "Email",
+    "mobile": "Mobile",
+    "phone": "Phone",
+    "website": "Website",
+    "notes": "Notes",
+    "attachImage": "Attach Card Image",
+    "submit": "Save Lead",
+    "submitting": "Saving…",
+    "saved": "Lead saved — {{name}}",
+    "savedOffline": "Saved offline — will sync when online.",
+    "duplicateWarning": "A lead with this email already exists in this campaign. Continue anyway?",
+    "duplicateContinue": "Continue",
+    "duplicateCancel": "Cancel",
+    "required": "Required",
+    "atLeastOne": "At least one of email, mobile, or phone is required.",
+    "list": "Recent Leads",
+    "detail": "Lead Detail",
+    "owner": "Owner",
+    "capturedVia": "Captured Via",
+    "createdAt": "Created"
+  },
+  "sync": {
+    "title": "Sync Queue",
+    "pending": "Pending",
+    "inFlight": "Syncing",
+    "failed": "Failed",
+    "completed": "Synced",
+    "retry": "Retry",
+    "empty": "All caught up!",
+    "badge": {
+      "allSynced": "All synced",
+      "pending": "{{count}} pending",
+      "failed": "{{count}} failed"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "server": "Server URL",
+    "user": "Logged in as",
+    "clearCache": "Clear Cache",
+    "clearCacheConfirm": "This will remove cached campaigns and recent leads. Continue?",
+    "version": "Version",
+    "logout": "Logout"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "ok": "OK",
+    "back": "Back",
+    "save": "Save",
+    "loading": "Loading…",
+    "offline": "You're offline. Saved locally.",
+    "cameraError": "Camera access is required. Enable it in browser settings.",
+    "noData": "Nothing here yet."
+  }
+}

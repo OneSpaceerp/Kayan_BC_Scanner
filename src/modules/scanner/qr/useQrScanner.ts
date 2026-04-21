@@ -59,7 +59,7 @@ export function useQrScanner({
     scanner
       .start(
         { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 260, height: 260 } },
+        { fps: 10 },
         (decodedText) => {
           if (!mountedRef.current) return;
           onScan(decodedText);

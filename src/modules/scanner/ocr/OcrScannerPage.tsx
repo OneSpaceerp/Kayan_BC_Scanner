@@ -47,6 +47,7 @@ export default function OcrScannerPage() {
         <div className="flex-1 relative flex items-center justify-center overflow-hidden">
           <video
             ref={videoRef}
+            autoPlay
             playsInline
             muted
             className="absolute inset-0 w-full h-full object-cover"

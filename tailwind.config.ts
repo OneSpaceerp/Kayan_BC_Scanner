@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
@@ -25,5 +26,5 @@ export default {
       borderRadius: { xl: "14px", "2xl": "18px" },
     },
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config;

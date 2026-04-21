@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DevPage from "@/app/dev/DevPage";
 import LoginPage from "@/modules/auth/pages/LoginPage";
 import CampaignSelectPage from "@/modules/campaign/pages/CampaignSelectPage";
 import ScannerHubPage from "@/modules/scanner/pages/ScannerHubPage";
@@ -12,6 +13,7 @@ import SyncQueuePage from "@/modules/settings/pages/SyncQueuePage";
 import SettingsPage from "@/modules/settings/pages/SettingsPage";
 
 export const router = createBrowserRouter([
+  { path: "/__dev", element: <DevPage /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/campaigns", element: <CampaignSelectPage /> },
   { path: "/", element: <ScannerHubPage /> },

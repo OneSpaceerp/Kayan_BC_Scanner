@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { runOcr } from "./ocrWorker";
 import { extractFields } from "./fieldExtractor";
 
+export default function OcrPreviewPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const imageBlob = location.state?.imageBlob as Blob | undefined;

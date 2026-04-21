@@ -4,6 +4,7 @@ import { Camera, X } from "lucide-react";
 import { useCamera } from "@/shared/hooks/useCamera";
 import { preprocessImage } from "./imagePreprocess";
 
+export default function OcrScannerPage() {
   const navigate = useNavigate();
   const { videoRef, startCamera, stopCamera, captureImage, error } = useCamera();
 

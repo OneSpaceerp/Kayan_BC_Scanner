@@ -86,9 +86,11 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-black px-6 py-12">
       {/* Logo / branding */}
       <div className="mb-10 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand">
-          <span className="text-2xl font-bold text-white">BC</span>
-        </div>
+        <img
+          src="/icons/192.png"
+          alt={t("app.name")}
+          className="mx-auto mb-4 h-20 w-20 rounded-2xl"
+        />
         <h1 className="text-2xl font-bold text-white">{t("app.name")}</h1>
         <p className="mt-1 text-sm text-[#A0A0A0]">{t("app.tagline")}</p>
       </div>

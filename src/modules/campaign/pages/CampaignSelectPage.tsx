@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Plus, Search, WifiOff } from "lucide-react";
+import { isAxiosError } from "axios";
+import { Plus, Search, WifiOff, ServerCrash } from "lucide-react";
 import { AppHeader } from "@/shared/components/AppHeader";
 import { LoadingSpinner } from "@/shared/components/LoadingSpinner";
 import { EmptyState } from "@/shared/components/EmptyState";
@@ -63,11 +64,23 @@ export default function CampaignSelectPage() {
             <LoadingSpinner size="md" />
           </div>
         ) : error && campaigns.length === 0 ? (
-          <EmptyState
-            icon={<WifiOff className="h-8 w-8" />}
-            title={t("common.offline")}
-            description={t("campaign.noCampaigns")}
-          />
+          isAxiosError(error) && error.response != null ? (
+            <EmptyState
+              icon={<ServerCrash className="h-8 w-8" />}
+              title={`Server error ${error.response.status}`}
+              description={
+                error.response.status === 417 || error.response.status === 401
+                  ? t("auth.errors.sessionExpired")
+                  : t("auth.errors.serverError")
+              }
+            />
+          ) : (
+            <EmptyState
+              icon={<WifiOff className="h-8 w-8" />}
+              title={t("common.offline")}
+              description={t("campaign.noCampaigns")}
+            />
+          )
         ) : (
           <CampaignPicker
             campaigns={filtered}

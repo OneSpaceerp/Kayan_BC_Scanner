@@ -23,6 +23,8 @@ export function classifyAuthError(error: unknown): AuthErrorCode {
   if (isAxiosError(error)) {
     const status = error.response?.status;
     if (status === 401 || status === 403) return "invalidCredentials";
+    // Frappe v15+ returns 417 for invalid/expired token auth
+    if (status === 417) return "invalidCredentials";
     // No response = network down or CORS block
     return "unreachable";
   }

@@ -11,7 +11,9 @@ export function apply401Interceptor(
   return client.interceptors.response.use(
     (res) => res,
     (error) => {
-      if (error?.response?.status === 401) onUnauthorized();
+      // Frappe v15+ uses 417 for token auth failures in addition to 401
+      const status = error?.response?.status;
+      if (status === 401 || status === 417) onUnauthorized();
       return Promise.reject(error);
     }
   );

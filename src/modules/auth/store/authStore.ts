@@ -43,11 +43,17 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       // Step 1 — cookie-based login
       await apiLogin(serverUrl, email, password);
 
-      // Steps 2 & 3 — generate keys and read api_key while cookie is live
-      const [apiSecret, userRecord] = await Promise.all([
-        generateKeys(serverUrl, email),
-        fetchUser(serverUrl, email),
-      ]);
+      // Step 2 — generate (or rotate) api_secret; also sets api_key on first use
+      const apiSecret = await generateKeys(serverUrl, email);
+
+      // Step 3 — read api_key after generateKeys has committed to the DB.
+      // Must be sequential: if the user has no api_key yet, generateKeys creates
+      // it, and a parallel fetchUser would race and return an empty api_key.
+      const userRecord = await fetchUser(serverUrl, email);
+
+      if (!userRecord.api_key) {
+        throw new Error("api_key missing — generateKeys may not have committed yet");
+      }
 
       const session: ERPNextSession = {
         server_url: serverUrl,

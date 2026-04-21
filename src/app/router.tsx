@@ -6,6 +6,7 @@ import CampaignSelectPage from "@/modules/campaign/pages/CampaignSelectPage";
 import ScannerHubPage from "@/modules/scanner/pages/ScannerHubPage";
 import QrScannerPage from "@/modules/scanner/qr/QrScannerPage";
 import OcrScannerPage from "@/modules/scanner/ocr/OcrScannerPage";
+import OcrPreviewPage from "@/modules/scanner/ocr/OcrPreviewPage";
 import ManualEntryPage from "@/modules/scanner/manual/ManualEntryPage";
 import LeadReviewPage from "@/modules/lead/pages/LeadReviewPage";
 import LeadListPage from "@/modules/lead/pages/LeadListPage";
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <ScannerHubPage /> },
       { path: "/scan/qr", element: <QrScannerPage /> },
       { path: "/scan/ocr", element: <OcrScannerPage /> },
+      { path: "/scan/ocr/preview", element: <OcrPreviewPage /> },
       { path: "/scan/manual", element: <ManualEntryPage /> },
       { path: "/lead/review", element: <LeadReviewPage /> },
       { path: "/leads", element: <LeadListPage /> },

@@ -1,6 +1,4 @@
 import { clsx } from "clsx";
-import { format } from "date-fns";
-import { ar, enUS } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 import { CheckCircle } from "lucide-react";
 import type { Campaign } from "@/shared/types/erpnext";
@@ -12,8 +10,7 @@ interface CampaignPickerProps {
 }
 
 export function CampaignPicker({ campaigns, activeName, onSelect }: CampaignPickerProps) {
-  const { t, i18n } = useTranslation();
-  const locale = i18n.language === "ar" ? ar : enUS;
+  const { t } = useTranslation();
 
   if (campaigns.length === 0) {
     return (
@@ -46,11 +43,6 @@ export function CampaignPicker({ campaigns, activeName, onSelect }: CampaignPick
                 >
                   {c.campaign_name}
                 </p>
-                {c.start_date && (
-                  <p className="mt-0.5 text-xs text-[#A0A0A0]">
-                    {format(new Date(c.start_date), "d MMM yyyy", { locale })}
-                  </p>
-                )}
               </div>
               {isActive && <CheckCircle className="h-5 w-5 shrink-0 text-brand" />}
             </button>

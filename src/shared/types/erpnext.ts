@@ -10,8 +10,6 @@ export interface ERPNextSession {
 export interface Campaign {
   name: string;
   campaign_name: string;
-  start_date?: string;
-  description?: string;
   modified?: string;
 }
 

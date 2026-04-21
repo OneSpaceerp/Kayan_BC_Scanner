@@ -11,7 +11,7 @@ export interface CreateCampaignInput {
 export async function listCampaigns(client: AxiosInstance): Promise<Campaign[]> {
   const res = await client.get<{ data: Campaign[] }>(ENDPOINTS.campaigns, {
     params: {
-      fields: JSON.stringify(["name", "campaign_name", "start_date", "modified"]),
+      fields: JSON.stringify(["name", "campaign_name", "modified"]),
       order_by: "modified desc",
       limit_page_length: 50,
     },

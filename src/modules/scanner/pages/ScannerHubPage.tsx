@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { QrCode, ScanLine, PenLine, Settings } from "lucide-react";
 import { clsx } from "clsx";
 import { AppHeader } from "@/shared/components/AppHeader";
-import { useAuth } from "@/modules/auth/hooks/useAuth";
+import { useCampaignStore } from "@/modules/campaign/store/campaignStore";
 
 export default function ScannerHubPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { session } = useAuth();
+  const activeCampaign = useCampaignStore((s) => s.activeCampaign);
 
   const tiles = [
     { icon: QrCode, label: t("scanner.hub.qr"), to: "/scan/qr", ready: false },
@@ -20,7 +20,8 @@ export default function ScannerHubPage() {
     <div className="min-h-screen bg-black text-white">
       <AppHeader
         title={t("scanner.hub.title")}
-        campaignName="—"
+        campaignName={activeCampaign?.campaign_name}
+        onCampaignClick={() => navigate("/campaigns")}
         right={
           <button
             onClick={() => navigate("/settings")}
@@ -32,12 +33,16 @@ export default function ScannerHubPage() {
         }
       />
 
-      <div className="mx-auto max-w-lg p-6">
-        {session && (
-          <p className="mb-6 text-sm text-[#A0A0A0]">
-            {t("common.loading")} — Milestone 5 (campaign) and 6 (scanner) coming next.
-          </p>
+      <div className="mx-auto max-w-lg p-6 space-y-4">
+        {!activeCampaign && (
+          <button
+            onClick={() => navigate("/campaigns")}
+            className="w-full rounded-xl border border-[#F59E0B]/40 bg-[#F59E0B]/10 px-4 py-3 text-left text-sm text-[#F59E0B]"
+          >
+            {t("campaign.active")}: {t("common.noData")} — tap to select a campaign →
+          </button>
         )}
+
         <div className="grid grid-cols-1 gap-4">
           {tiles.map(({ icon: Icon, label, to, ready }) => (
             <button

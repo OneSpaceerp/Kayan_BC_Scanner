@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { RequireAuth } from "@/app/RequireAuth";
 import DevPage from "@/app/dev/DevPage";
 import LoginPage from "@/modules/auth/pages/LoginPage";
 import CampaignSelectPage from "@/modules/campaign/pages/CampaignSelectPage";
@@ -15,14 +16,19 @@ import SettingsPage from "@/modules/settings/pages/SettingsPage";
 export const router = createBrowserRouter([
   { path: "/__dev", element: <DevPage /> },
   { path: "/login", element: <LoginPage /> },
-  { path: "/campaigns", element: <CampaignSelectPage /> },
-  { path: "/", element: <ScannerHubPage /> },
-  { path: "/scan/qr", element: <QrScannerPage /> },
-  { path: "/scan/ocr", element: <OcrScannerPage /> },
-  { path: "/scan/manual", element: <ManualEntryPage /> },
-  { path: "/lead/review", element: <LeadReviewPage /> },
-  { path: "/leads", element: <LeadListPage /> },
-  { path: "/leads/:id", element: <LeadDetailPage /> },
-  { path: "/sync", element: <SyncQueuePage /> },
-  { path: "/settings", element: <SettingsPage /> },
+  {
+    element: <RequireAuth />,
+    children: [
+      { path: "/campaigns", element: <CampaignSelectPage /> },
+      { path: "/", element: <ScannerHubPage /> },
+      { path: "/scan/qr", element: <QrScannerPage /> },
+      { path: "/scan/ocr", element: <OcrScannerPage /> },
+      { path: "/scan/manual", element: <ManualEntryPage /> },
+      { path: "/lead/review", element: <LeadReviewPage /> },
+      { path: "/leads", element: <LeadListPage /> },
+      { path: "/leads/:id", element: <LeadDetailPage /> },
+      { path: "/sync", element: <SyncQueuePage /> },
+      { path: "/settings", element: <SettingsPage /> },
+    ],
+  },
 ]);

@@ -4,6 +4,9 @@ import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 
 export default defineConfig({
+  build: {
+    chunkSizeWarningLimit: 3000, // Tesseract.js + html5-qrcode are large; split in M11
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

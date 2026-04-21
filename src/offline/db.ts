@@ -7,6 +7,11 @@ export interface SessionRow {
   iv: string;
 }
 
+export interface CryptoKeyRow {
+  id: "master";
+  keyData: ArrayBuffer;
+}
+
 export interface CampaignRow {
   name: string;
   campaign_name: string;
@@ -46,6 +51,7 @@ export interface ActiveCampaignRow {
 
 class BcScannerDB extends Dexie {
   session!: Table<SessionRow, string>;
+  cryptoKey!: Table<CryptoKeyRow, string>;
   campaigns!: Table<CampaignRow, string>;
   pendingLeads!: Table<PendingLeadRow, number>;
   recentLeads!: Table<RecentLeadRow, string>;
@@ -55,6 +61,7 @@ class BcScannerDB extends Dexie {
     super("bc_scanner");
     this.version(1).stores({
       session: "id",
+      cryptoKey: "id",
       campaigns: "name, campaign_name, modified",
       pendingLeads: "++id, campaign_name, status, created_at",
       recentLeads: "name, campaign_name, creation",

@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { runOcr } from "./ocrWorker";
 import { extractFields } from "./fieldExtractor";
 
-export default function OcrPreviewPage() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const imageBlob = location.state?.imageBlob as Blob | undefined;

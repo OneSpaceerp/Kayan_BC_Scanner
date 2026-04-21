@@ -1,5 +1,4 @@
 import { db, type PendingLeadRow } from "@/offline/db";
-import { createLead, addComment, uploadFile } from "@/modules/lead/api/leadApi";
 import { type AxiosInstance } from "axios";
 
 export async function enqueueLead(
@@ -25,7 +24,7 @@ export async function enqueueLead(
 }
 
 // Background or manual sync function
-export async function triggerSync(client?: AxiosInstance) {
+export async function triggerSync(_client?: AxiosInstance) {
   // Try flushing queue here. For Milestone 9.
   // ... to be implemented completely ...
 }

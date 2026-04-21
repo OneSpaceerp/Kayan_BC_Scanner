@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { Camera, X } from "lucide-react";
 import { useCamera } from "@/shared/hooks/useCamera";
 import { preprocessImage } from "./imagePreprocess";
 
-export default function OcrScannerPage() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const { videoRef, startCamera, stopCamera, captureImage, error } = useCamera();
 

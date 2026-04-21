@@ -12,8 +12,8 @@ export default function ScannerHubPage() {
 
   const tiles = [
     { icon: QrCode, label: t("scanner.hub.qr"), to: "/scan/qr", ready: true },
-    { icon: ScanLine, label: t("scanner.hub.ocr"), to: "/scan/ocr", ready: false },
-    { icon: PenLine, label: t("scanner.hub.manual"), to: "/scan/manual", ready: false },
+    { icon: ScanLine, label: t("scanner.hub.ocr"), to: "/scan/ocr", ready: true },
+    { icon: PenLine, label: t("scanner.hub.manual"), to: "/scan/manual", ready: true },
   ];
 
   return (

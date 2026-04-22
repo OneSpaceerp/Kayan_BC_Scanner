@@ -25,10 +25,25 @@ export function useQrScanner({
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const mountedRef = useRef(true);
   const startedRef = useRef(false);
+  // Use refs for callbacks to avoid stale closures
+  const onScanRef = useRef(onScan);
+  const onErrorRef = useRef(onError);
+  // Debounce: prevent firing multiple times for the same code
+  const lastScannedRef = useRef<string | null>(null);
+  const lastScannedTimeRef = useRef(0);
 
   const [state, setState] = useState<QrScannerState>("idle");
   const [torchOn, setTorchOn] = useState(false);
   const [torchSupported, setTorchSupported] = useState(false);
+
+  // Keep refs in sync with latest callbacks
+  useEffect(() => {
+    onScanRef.current = onScan;
+  }, [onScan]);
+
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
 
   const stop = useCallback(async () => {
     if (!scannerRef.current) return;
@@ -51,11 +66,8 @@ export function useQrScanner({
     if (startedRef.current) return;
     startedRef.current = true;
 
-    const scanner = new Html5Qrcode(elementId, { 
+    const scanner = new Html5Qrcode(elementId, {
       verbose: false,
-      experimentalFeatures: {
-        useBarCodeDetectorIfSupported: true
-      }
     });
     scannerRef.current = scanner;
 
@@ -64,14 +76,26 @@ export function useQrScanner({
     scanner
       .start(
         { facingMode: "environment" },
-        { 
+        {
           fps: 10,
           qrbox: { width: 250, height: 250 },
-          aspectRatio: 1.0
+          aspectRatio: 1.0,
         },
         (decodedText) => {
           if (!mountedRef.current) return;
-          onScan(decodedText);
+          
+          // Debounce: ignore same code within 3 seconds
+          const now = Date.now();
+          if (
+            decodedText === lastScannedRef.current &&
+            now - lastScannedTimeRef.current < 3000
+          ) {
+            return;
+          }
+          lastScannedRef.current = decodedText;
+          lastScannedTimeRef.current = now;
+
+          onScanRef.current(decodedText);
         },
         undefined,
       )
@@ -96,7 +120,7 @@ export function useQrScanner({
       .catch((err: unknown) => {
         if (!mountedRef.current) return;
         setState("error");
-        onError?.(err instanceof Error ? err.message : String(err));
+        onErrorRef.current?.(err instanceof Error ? err.message : String(err));
       });
 
     return () => {

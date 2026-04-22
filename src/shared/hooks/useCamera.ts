@@ -8,14 +8,14 @@ export function useCamera() {
   const startCamera = useCallback(async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
+        video: { 
+          facingMode: { ideal: "environment" },
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        },
         audio: false,
       });
       setStream(mediaStream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-        videoRef.current.play();
-      }
       setError(null);
     } catch (err: any) {
       setError(err.message || "Failed to access camera");
@@ -43,6 +43,13 @@ export function useCamera() {
       return canvas;
     }
     return null;
+  }, [stream]);
+
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+      videoRef.current.play().catch(console.error);
+    }
   }, [stream]);
 
   useEffect(() => {

@@ -51,7 +51,12 @@ export function useQrScanner({
     if (startedRef.current) return;
     startedRef.current = true;
 
-    const scanner = new Html5Qrcode(elementId, { verbose: false });
+    const scanner = new Html5Qrcode(elementId, { 
+      verbose: false,
+      experimentalFeatures: {
+        useBarCodeDetectorIfSupported: true
+      }
+    });
     scannerRef.current = scanner;
 
     setState("starting");
@@ -59,7 +64,11 @@ export function useQrScanner({
     scanner
       .start(
         { facingMode: "environment" },
-        { fps: 10 },
+        { 
+          fps: 10,
+          qrbox: { width: 250, height: 250 },
+          aspectRatio: 1.0
+        },
         (decodedText) => {
           if (!mountedRef.current) return;
           onScan(decodedText);
